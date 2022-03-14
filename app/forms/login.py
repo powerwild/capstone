@@ -11,5 +11,5 @@ def check_has_name_or_email(form, field):
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[check_has_name_or_email])
-    email = StringField('Email', Optional()])
+    email = StringField('Email', Optional())
     password = PasswordField('Password', validators=[InputRequired(), Length(min=6, message='Password must be at least 6 characters.')])

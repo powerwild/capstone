@@ -5,6 +5,7 @@ from flask_login import LoginManager, current_user
 from app.config import Configure
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
@@ -23,12 +24,6 @@ from app.forms import LoginForm
 def load_user(id):
     # id = str(id).encode('utf-8')
     return User.get(id)
-
-
-@app.route('/')
-def index():
-    form = LoginForm()
-    return render_template('form.html', user=current_user form=form)
 
 
 
