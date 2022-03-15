@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, request
 from flask_login import current_user, login_user, logout_user
 from app.forms import LoginForm, SignupForm
 from app import db
-from datetime import datetime
 from app.models import User
 
 user_routes = Blueprint('users', __name__)
@@ -37,7 +36,6 @@ def sign_up():
             username=form.data['username'],
             email=form.data['email'],
             password=form.data['password'],
-            created_at=datetime.now()
         )
         db.session.add(user)
         db.session.commit()
@@ -51,3 +49,11 @@ def sign_up():
 def logout():
     logout_user()
     return {'message': 'User logged out'}
+
+
+@user_routes.route('/unauthorized')
+def unauthorized():
+    """
+    Returns unauthorized JSON when flask-login authentication fails
+    """
+    return {'errors': ['Unauthorized']}, 401

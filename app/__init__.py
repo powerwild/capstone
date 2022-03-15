@@ -13,7 +13,7 @@ app.config.from_object(Configure)
 db = SQLAlchemy(app)
 Migrate(app, db)
 login_manager = LoginManager(app)
-login_manager.login_view = 'users.auth'
+login_manager.login_view = 'users.unauthorized'
 CORS(app)
 
 from app.models import User
@@ -27,7 +27,7 @@ from app.routes import trade_routes
 @login_manager.user_loader
 def load_user(id):
     # id = str(id).encode('utf-8')
-    return User.get(id)
+    return User.query.get(id)
 
 
 from app.seeders import seeder_command

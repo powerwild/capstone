@@ -33,5 +33,5 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "games": self.games
+            "games": [game.format_dict() for game in self.games]
         }
