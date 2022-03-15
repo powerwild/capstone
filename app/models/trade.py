@@ -1,5 +1,5 @@
 from app import db
-from datetime import datetime
+
 
 
 class Trade(db.Model):
@@ -13,8 +13,7 @@ class Trade(db.Model):
     status = db.Column(db.String, nullable=False)
     req_returned = db.Column(db.Boolean, default=False)
     rec_returned = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime(), nullable=False)
-    updated_at = db.Column(db.DateTime(), nullable=False)
+
 
 
     def format_dict(self):

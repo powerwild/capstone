@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
 from app import db
-from datetime import datetime
 from app.models import Trade
 from app.forms import NewTradeForm, UpdateTradeForm
 
@@ -27,14 +26,13 @@ def create_trade(recipient_id):
             rec_game_id=form.data['rec_game_id'],
             status='Pending',
             req_returned=False,
-            rec_returned=False,
-            created_at=datetime.now(),
-            updated_at=datetime.now()
+            rec_returned=False
         )
-
         db.session.add(trade)
         db.session.commit()
         return trade.format_dict()
+    if form.errors:
+        return {'errors': form.errors}
 
 
 @trade_routes.route('/', methods=['PUT'])
@@ -46,17 +44,28 @@ def finish_trade_request():
         trade = Trade.query.filter(Trade.recipient_id == current_user.id).first()
         trade.req_game_id = form.data['req_game_id']
         trade.status = 'Accepted'
-        trade.updated_at = datetime.now()
         db.session.commit()
         return trade.format_dict()
+    if form.errors:
+        return {'errors': form.errors}
 
-@trade_routes.route('/<int:trade_id', methods=['PUT'])
+
+@trade_routes.route('/<int:trade_id>', methods=['PUT'])
 @login_required
 def update_trade(trade_id):
-    pass
+    trade = Trade.query.get(trade_id)
+    if trade.requester_id == current_user.id:
+        trade.req_returned = True
+    if trade.recipient_id == current_user.id:
+        trade.rec_returned = True
+    if trade.req_returned == True:
+        if trade.rec_returned == True:
+            trade.status = 'Complete'
+    db.session.commit()
+    return trade.format_dict()
 
 
-@trade_routes.route('/<int:trade_id', methods=['DELETE'])
+@trade_routes.route('/<int:trade_id>', methods=['DELETE'])
 @login_required
 def delete_trade(trade_id):
     trade = Trade.query.get(trade_id)

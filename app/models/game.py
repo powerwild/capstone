@@ -1,5 +1,5 @@
 from app import db
-from datetime import datetime
+
 
 class Game(db.Model):
     __tablename__ = 'games'
@@ -13,8 +13,7 @@ class Game(db.Model):
     console = db.Column(db.String, nullable=False)
     copies = db.Column(db.Integer, nullable=False)
     copies_avail = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime(), nullable=False)
-    updated_at = db.Column(db.DateTime(), nullable=False)
+
 
 
     def format_dict(self):

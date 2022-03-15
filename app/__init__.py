@@ -30,6 +30,10 @@ def load_user(id):
     return User.get(id)
 
 
+from app.seeders import seeder_command
+app.cli.add_command(seeder_command)
+
+
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(gamer_routes, url_prefix='/api/gamers')
 app.register_blueprint(trade_routes, url_prefix='/api/trades')
