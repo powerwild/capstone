@@ -18,6 +18,10 @@ CORS(app)
 
 from app.models import User
 from app.forms import LoginForm
+from app.routes import user_routes
+from app.routes import gamer_routes
+from app.routes import trade_routes
+
 
 
 @login_manager.user_loader
@@ -26,7 +30,9 @@ def load_user(id):
     return User.get(id)
 
 
-
+app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(gamer_routes, url_prefix='/api/gamers')
+app.register_blueprint(trade_routes, url_prefix='/api/trades')
 
 @app.before_request
 def https_redirect():

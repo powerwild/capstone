@@ -12,6 +12,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime(), nullable=False)
 
+    games = db.relationship('Game')
+
     @property
     def password(self):
         return self.hashed_password
