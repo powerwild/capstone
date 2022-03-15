@@ -22,7 +22,7 @@ def create_games():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         game = Game(
-            userId=current_user.id,
+            user_id=current_user.id,
             title=form.data['title'],
             image_url=form.data['image_url'],
             description=form.data['description'],

@@ -35,13 +35,13 @@ def create_trade(recipient_id):
         return {'errors': form.errors}
 
 
-@trade_routes.route('/', methods=['PUT'])
+@trade_routes.route('/<int:trade_id>', methods=['PUT'])
 @login_required
-def finish_trade_request():
+def finish_trade_request(trade_id):
     form = UpdateTradeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        trade = Trade.query.filter(Trade.recipient_id == current_user.id).first()
+        trade = Trade.query.get(trade_id)
         trade.req_game_id = form.data['req_game_id']
         trade.status = 'Accepted'
         db.session.commit()
@@ -50,7 +50,7 @@ def finish_trade_request():
         return {'errors': form.errors}
 
 
-@trade_routes.route('/<int:trade_id>', methods=['PUT'])
+@trade_routes.route('/<int:trade_id>', methods=['PATCH'])
 @login_required
 def update_trade(trade_id):
     trade = Trade.query.get(trade_id)
