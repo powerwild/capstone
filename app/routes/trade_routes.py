@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
 from app import db
 from app.models import Trade
+from app.models import Game
 from app.forms import NewTradeForm, UpdateTradeForm
 
 trade_routes = Blueprint('trades', __name__)
@@ -10,7 +11,7 @@ trade_routes = Blueprint('trades', __name__)
 @trade_routes.route('/', methods=['GET'])
 @login_required
 def get_trades():
-    trades = Trade.query.filter(Trade.recipient_id == current_user.id).all()
+    trades = Trade.query.all()
     return {'trades': [trade.format_dict() for trade in trades]}
 
 
@@ -44,6 +45,10 @@ def finish_trade_request(trade_id):
         trade = Trade.query.get(trade_id)
         trade.req_game_id = form.data['req_game_id']
         trade.status = 'Accepted'
+        req_game = Game.query.get(form.data['req_game_id'])
+        req_game.avail_copies -= 1
+        rec_game = Game.query.get(trade.rec_game_id)
+        rec_game.avail_copies -= 1
         db.session.commit()
         return trade.format_dict()
     if form.errors:
@@ -61,6 +66,10 @@ def update_trade(trade_id):
     if trade.req_returned == True:
         if trade.rec_returned == True:
             trade.status = 'Complete'
+    req_game = Game.query.get(trade.req_game_id)
+    req_game.avail_copies += 1
+    rec_game = Game.query.get(trade.rec_game_id)
+    rec_game.avail_copies += 1
     db.session.commit()
     return trade.format_dict()
 

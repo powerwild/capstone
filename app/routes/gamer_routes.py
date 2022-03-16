@@ -33,8 +33,10 @@ def create_games():
         )
         db.session.add(game)
         db.session.commit()
+        print(game.format_dict())
         return game.format_dict()
     if form.errors:
+        print(form.errors)
         return {'errors': form.errors}
 
 
