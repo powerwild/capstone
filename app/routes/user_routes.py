@@ -20,7 +20,7 @@ def login():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User.query.filter(User.username == form.data['credential']).first()
-        if not user.get('username'):
+        if not user:
             user = User.query.filter(User.email == form.data['credential']).first()
         login_user(user)
         return user.format_dict()
