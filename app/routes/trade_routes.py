@@ -61,15 +61,19 @@ def update_trade(trade_id):
     trade = Trade.query.get(trade_id)
     if trade.requester_id == current_user.id:
         trade.req_returned = True
+        req_game = Game.query.get(trade.req_game_id)
+        req_game.copies_avail += 1
     if trade.recipient_id == current_user.id:
         trade.rec_returned = True
+        rec_game = Game.query.get(trade.rec_game_id)
+        rec_game.copies_avail += 1
     if trade.req_returned == True:
         if trade.rec_returned == True:
             trade.status = 'Completed'
-    req_game = Game.query.get(trade.req_game_id)
-    req_game.copies_avail += 1
-    rec_game = Game.query.get(trade.rec_game_id)
-    rec_game.copies_avail += 1
+            db.session.delete(trade)
+            db.session.commit()
+            print('-------------------', trade.format_dict())
+            return trade.format_dict()
     db.session.commit()
     return trade.format_dict()
 
