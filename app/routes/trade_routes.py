@@ -67,9 +67,9 @@ def update_trade(trade_id):
         if trade.rec_returned == True:
             trade.status = 'Completed'
     req_game = Game.query.get(trade.req_game_id)
-    req_game.avail_copies += 1
+    req_game.copies_avail += 1
     rec_game = Game.query.get(trade.rec_game_id)
-    rec_game.avail_copies += 1
+    rec_game.copies_avail += 1
     db.session.commit()
     return trade.format_dict()
 

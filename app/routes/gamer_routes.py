@@ -33,8 +33,8 @@ def create_games():
         )
         db.session.add(game)
         db.session.commit()
-        print(game.format_dict())
-        return game.format_dict()
+        user = User.query.get(current_user.id)
+        return user.format_dict()
     if form.errors:
         print(form.errors)
         return {'errors': form.errors}
@@ -47,15 +47,20 @@ def update_games(game_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         game = Game.query.get(game_id)
-        game.title = form.data['title'],
-        game.image_url = form.data['image_url'],
-        game.description = form.data['description'],
-        game.genre = form.data['genre'],
-        game.console = form.data['console'],
-        game.copies = form.data['copies'],
-        game.copies_avail = form.data['copies']
+        game.title = form.data['title']
+        game.image_url = form.data['image_url']
+        game.description = form.data['description']
+        game.genre = form.data['genre']
+        game.console = form.data['console']
+        if game.copies == game.copies_avail:
+            game.copies_avail = form.data['copies']
+        else:
+            game.copies_avail = form.data['copies'] - (game.copies - game.copies_avail)
+        game.copies = form.data['copies']
+
         db.session.commit()
-        return game.format_dict()
+        user = User.query.get(current_user.id)
+        return user.format_dict()
     if form.errors:
         return {'errors': form.errors}
 
@@ -65,4 +70,5 @@ def delete_games(game_id):
     game = Game.query.get(game_id)
     db.session.delete(game)
     db.session.commit()
-    return {'message': 'Game deleted'}
+    user = User.query.get(current_user.id)
+    return user.format_dict()

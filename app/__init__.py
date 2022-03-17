@@ -23,6 +23,15 @@ from app.routes import gamer_routes
 from app.routes import trade_routes
 
 
+@app.before_request
+def https_redirect():
+    if os.environ.get('FLASK_ENV') == 'production':
+        if request.headers.get('X-Forwarded-Proto') == 'http':
+            url = request.url.replace('http://', 'https://', 1)
+            code = 301
+            return redirect(url, code=code)
+
+
 
 @login_manager.user_loader
 def load_user(id):
@@ -38,13 +47,6 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(gamer_routes, url_prefix='/api/gamers')
 app.register_blueprint(trade_routes, url_prefix='/api/trades')
 
-@app.before_request
-def https_redirect():
-    if os.environ.get('FLASK_ENV') == 'production':
-        if request.headers.get('X-Forwarded-Proto') == 'http':
-            url = request.url.replace('http://', 'https://', 1)
-            code = 301
-            return redirect(url, code=code)
 
 
 @app.after_request
