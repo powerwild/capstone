@@ -9,10 +9,19 @@ user_routes = Blueprint('users', __name__)
 
 
 def format_form_errors(errors):
-    formatted_errors =[]
+    formatted_errors = []
     for field in errors:
         for error in errors[field]:
-            formatted_errors.append(f'{field.title()} {error[5:]}')
+            if field == 'confirm_password':
+                formatted_errors.append(f'Confirm Password {" ".join(str.split(error)[1:])}')
+            elif field == 'email':
+                formatted_errors.append(f'{field.title()} {error.lower()}')
+            elif error == 'Invalid URL.':
+                formatted_errors.append(error)
+            elif field == 'image_url':
+                formatted_errors.append(f'Image URL {" ".join(str.split(error)[1:])}')
+            else:
+                formatted_errors.append(f'{field.title()} {" ".join(str.split(error)[1:])}')
     return formatted_errors
 
 
@@ -51,6 +60,7 @@ def sign_up():
         db.session.commit()
         login_user(user)
         return user.format_dict()
+    print('------------------------------', form.errors)
     print('------------------------------', format_form_errors(form.errors))
     return {'errors': format_form_errors(form.errors)}
 

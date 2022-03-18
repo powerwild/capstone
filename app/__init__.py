@@ -21,6 +21,7 @@ from app.forms import LoginForm
 from app.routes import user_routes
 from app.routes import gamer_routes
 from app.routes import trade_routes
+from app.routes import review_routes
 
 
 @app.before_request
@@ -46,7 +47,7 @@ app.cli.add_command(seeder_command)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(gamer_routes, url_prefix='/api/gamers')
 app.register_blueprint(trade_routes, url_prefix='/api/trades')
-
+app.register_blueprint(review_routes, url_prefix='/api/reviews')
 
 
 @app.after_request
