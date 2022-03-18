@@ -36,14 +36,18 @@ def create_review():
 @review_routes.route('/<int:review_id>', methods=['PUT'])
 @login_required
 def update_review(review_id):
+    review = Review.query.get(review_id)
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print(form.data['review'])
     if form.validate_on_submit():
-        review = Review.query.get(review_id)
         review.review = form.data['review']
+        review.gamer_id = form.data['gamer_id']
         db.session.commit()
+        print(review.format_dict())
         return review.format_dict()
     if form.errors:
+        print(form.errors)
         return {'errors': format_form_errors(form.errors)}
 
 

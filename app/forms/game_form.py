@@ -14,5 +14,5 @@ class GameForm(FlaskForm):
     image_url = StringField('Image URL', validators=[DataRequired(), URL()])
     description = TextAreaField('Description', validators=[DataRequired()])
     genre = NoValidateSelectField('Genre', choices=['Strategy', 'Sandbox', 'First Person Shooter', 'Multiplayer Online', 'Role-Playing', 'Simulation', 'Sports', 'Puzzle', 'Adventure', 'Survival', 'Platformer'])
-    console = NoValidateSelectField('Console', choices=['PlayStation 4','Playstation 3', 'Xbox 1', 'Xbox 360', 'Switch', 'Wii U', 'PC'])
+    console = NoValidateSelectField('Console', choices=['Playstation 4','Playstation 3', 'Xbox 1', 'Xbox 360', 'Switch', 'Wii U', 'PC'])
     copies = IntegerField('Copies Owned', validators=[DataRequired(), NumberRange(min=1, message='Must own at least one copy.')])

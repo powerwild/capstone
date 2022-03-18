@@ -16,6 +16,8 @@ def format_form_errors(errors):
                 formatted_errors.append(f'Confirm Password {" ".join(str.split(error)[1:])}')
             elif field == 'email':
                 formatted_errors.append(f'{field.title()} {error.lower()}')
+            elif field == 'gamer_id':
+                pass
             elif error == 'Invalid URL.':
                 formatted_errors.append(error)
             elif field == 'image_url':
