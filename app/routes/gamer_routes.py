@@ -4,6 +4,7 @@ from app import db
 from app.models import User
 from app.models import Game
 from app.forms import GameForm
+from app.routes.user_routes import format_form_errors
 
 gamer_routes = Blueprint('gamers', __name__)
 
@@ -37,7 +38,7 @@ def create_games():
         return user.format_dict()
     if form.errors:
         print(form.errors)
-        return {'errors': form.errors}
+        return {'errors': format_form_errors(form.errors)}
 
 
 @gamer_routes.route('/<int:game_id>', methods=['PUT'])
@@ -62,7 +63,7 @@ def update_games(game_id):
         user = User.query.get(current_user.id)
         return user.format_dict()
     if form.errors:
-        return {'errors': form.errors}
+        return {'errors': format_form_errors(form.errors)}
 
 @gamer_routes.route('/<int:game_id>', methods=['DELETE'])
 @login_required

@@ -4,7 +4,16 @@ from app.forms import LoginForm, SignupForm
 from app import db
 from app.models import User
 
+
 user_routes = Blueprint('users', __name__)
+
+
+def format_form_errors(errors):
+    formatted_errors =[]
+    for field in errors:
+        for error in errors[field]:
+            formatted_errors.append(f'{field.title()} {error[5:]}')
+    return formatted_errors
 
 
 @user_routes.route('/auth')
@@ -24,7 +33,8 @@ def login():
             user = User.query.filter(User.email == form.data['credential']).first()
         login_user(user)
         return user.format_dict()
-    return {'errors': form.errors}
+    print(form.errors)
+    return {'errors': format_form_errors(form.errors)}
 
 
 @user_routes.route('/signup', methods=['POST'])
@@ -40,9 +50,9 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        print(user.format_dict())
         return user.format_dict()
-    return {'errors': form.errors}
+    print('------------------------------', format_form_errors(form.errors))
+    return {'errors': format_form_errors(form.errors)}
 
 
 @user_routes.route('/logout')

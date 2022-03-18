@@ -4,6 +4,7 @@ from app import db
 from app.models import Trade
 from app.models import Game
 from app.forms import NewTradeForm, UpdateTradeForm
+from app.routes.user_routes import format_form_errors
 
 trade_routes = Blueprint('trades', __name__)
 
@@ -33,7 +34,7 @@ def create_trade(recipient_id):
         db.session.commit()
         return trade.format_dict()
     if form.errors:
-        return {'errors': form.errors}
+        return {'errors': format_form_errors(form.errors)}
 
 
 @trade_routes.route('/<int:trade_id>', methods=['PUT'])
@@ -52,7 +53,7 @@ def finish_trade_request(trade_id):
         db.session.commit()
         return trade.format_dict()
     if form.errors:
-        return {'errors': form.errors}
+        return {'errors': format_form_errors(form.errors)}
 
 
 @trade_routes.route('/<int:trade_id>', methods=['PATCH'])
