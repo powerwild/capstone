@@ -42,6 +42,8 @@ def login():
         user = User.query.filter(User.username == form.data['credential']).first()
         if not user:
             user = User.query.filter(User.email == form.data['credential']).first()
+            if not user:
+                return {'errors': ['User does not exist.']}
         login_user(user)
         return user.format_dict()
     print(form.errors)
