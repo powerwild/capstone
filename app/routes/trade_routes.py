@@ -73,7 +73,6 @@ def update_trade(trade_id):
             trade.status = 'Completed'
             db.session.delete(trade)
             db.session.commit()
-            print('-------------------', trade.format_dict())
             return trade.format_dict()
     db.session.commit()
     return trade.format_dict()

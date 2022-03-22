@@ -36,7 +36,6 @@ def create_games():
         url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
     #   return upload, 400
     if upload:
-        print('--------------------------------------',upload)
         url = upload['url']
 
 
@@ -56,7 +55,6 @@ def create_games():
         user = User.query.get(current_user.id)
         return user.format_dict()
     if form.errors:
-        print(form.errors)
         return {'errors': format_form_errors(form.errors)}
 
 

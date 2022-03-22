@@ -46,7 +46,6 @@ def login():
                 return {'errors': ['User does not exist.']}
         login_user(user)
         return user.format_dict()
-    print(form.errors)
     return {'errors': format_form_errors(form.errors)}
 
 
@@ -64,8 +63,6 @@ def sign_up():
         db.session.commit()
         login_user(user)
         return user.format_dict()
-    print('------------------------------', form.errors)
-    print('------------------------------', format_form_errors(form.errors))
     return {'errors': format_form_errors(form.errors)}
 
 
