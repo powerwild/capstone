@@ -35,7 +35,7 @@ def create_games():
     if "url" not in upload:
         url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
     #   return upload, 400
-    if upload:
+    else:
         url = upload['url']
 
 
@@ -77,7 +77,7 @@ def update_games(game_id):
     if "url" not in upload:
         url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
     #   return upload, 400
-    if upload:
+    else:
         url = upload["url"]
 
     if form.validate_on_submit():
