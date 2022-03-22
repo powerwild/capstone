@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, TextAreaField, IntegerField
+from wtforms import StringField, SelectField, TextAreaField, IntegerField, FileField
 from wtforms.validators import DataRequired, URL, NumberRange
 
 
@@ -11,7 +11,7 @@ class NoValidateSelectField(SelectField):
 
 class GameForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    image_url = StringField('Image URL', validators=[DataRequired(), URL()])
+    image_url = FileField('Image', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
     genre = NoValidateSelectField('Genre', choices=['Strategy', 'Sandbox', 'First Person Shooter', 'Multiplayer Online', 'Role-Playing', 'Simulation', 'Sports', 'Puzzle', 'Adventure', 'Survival', 'Platformer'])
     console = NoValidateSelectField('Console', choices=['Playstation 4','Playstation 3', 'Xbox 1', 'Xbox 360', 'Switch', 'Wii U', 'PC'])
