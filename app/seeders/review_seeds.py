@@ -1,39 +1,19 @@
 from app import db
 from app.models import Review
 
+reviews_list = ['I have borrowed many games from this gamer and have not had a bad experience', 'I borrowed a game from this gamer and the disc was beyond readable.', "This gamer was very cooperative when their disc didn't work.", 'This gamer ruined my game disc!!!']
+gamers_review_list = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 10], [10, 1]]
 
 def add_review_seeds():
-    review1 = Review(
-        user_id=1,
-        gamer_id=2,
-        review='I loved this game!'
-    )
-    review2 = Review(
-        user_id=2,
-        gamer_id=3,
-        review='I loved this game!'
-    )
-    review3 = Review(
-        user_id=3,
-        gamer_id=4,
-        review='I loved this game!'
-    )
-    review4 = Review(
-        user_id=4,
-        gamer_id=5,
-        review='I loved this game!'
-    )
-    review5 = Review(
-        user_id=5,
-        gamer_id=1,
-        review='I loved this game!'
-    )
-    db.session.add(review1)
-    db.session.add(review2)
-    db.session.add(review3)
-    db.session.add(review4)
-    db.session.add(review5)
-    db.session.commit()
+    for review in reviews_list:
+        for gamers in gamers_review_list:
+            rev = Review(
+                user_id=gamers[0],
+                gamer_id=gamers[1],
+                review=review
+            )
+            db.session.add(rev)
+            db.session.commit()
 
 
 def remove_review_seeds():

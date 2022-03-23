@@ -1,27 +1,33 @@
 from app import db
 from app.models import Trade
+from app.seeders.game_seeds import gamer_ids
+
 
 def add_trade_seeds():
-    trade1 = Trade(
-        requester_id=1,
-        recipient_id=2,
-        req_game_id=1,
-        rec_game_id=2,
-        status='Accepted',
-        req_returned=False,
-        rec_returned=False
-    )
-    trade2 = Trade(
-        requester_id=3,
-        recipient_id=4,
-        rec_game_id=4,
-        status='Pending',
-        req_returned=False,
-        rec_returned=False
-    )
-    db.session.add(trade1)
-    db.session.add(trade2)
-    db.session.commit()
+    for x in gamer_ids:
+        if not x == gamer_ids[-1]:
+            y = x + 1
+            t = Trade(
+                requester_id=x,
+                recipient_id=y,
+                rec_game_id=1,
+                status='Pending',
+                req_returned=False,
+                rec_returned=False
+            )
+            db.session.add(t)
+            db.session.commit()
+        else:
+            t = Trade(
+                requester_id=x,
+                recipient_id=1,
+                rec_game_id=1,
+                status='Pending',
+                req_returned=False,
+                rec_returned=False
+            )
+            db.session.add(t)
+            db.session.commit()
 
 
 
