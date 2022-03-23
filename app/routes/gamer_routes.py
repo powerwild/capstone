@@ -26,17 +26,17 @@ def create_games():
     if type(form.data['image_url']) is not str:
         image = form.data['image_url']
 
-    if not allowed_file(image.filename):
-        url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
-    #   return {"errors": "file type not permitted"}, 400
+        if not allowed_file(image.filename):
+            url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
+        #   return {"errors": "file type not permitted"}, 400
 
-    image.filename = get_unique_filename(image.filename)
-    upload = upload_file_to_s3(image)
-    if "url" not in upload:
-        url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
-    #   return upload, 400
-    else:
-        url = upload['url']
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
+        #   return upload, 400
+        else:
+            url = upload['url']
 
 
     if form.validate_on_submit():
@@ -68,17 +68,17 @@ def update_games(game_id):
     if type(form.data['image_url']) is not str:
         image = form.data['image_url']
 
-    if not allowed_file(image.filename):
-        url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
-    #   return {"errors": "file type not permitted"}, 400
+        if not allowed_file(image.filename):
+            url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
+        #   return {"errors": "file type not permitted"}, 400
 
-    image.filename = get_unique_filename(image.filename)
-    upload = upload_file_to_s3(image)
-    if "url" not in upload:
-        url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
-    #   return upload, 400
-    else:
-        url = upload["url"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
+        #   return upload, 400
+        else:
+            url = upload["url"]
 
     if form.validate_on_submit():
         game = Game.query.get(game_id)

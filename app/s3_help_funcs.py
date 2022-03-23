@@ -42,4 +42,4 @@ def upload_file_to_s3(file, acl="public-read"):
 
 
 def delete_file_from_s3(filename):
-  s3.delete_object(Bucket='game-traderz', Key=filename)
+  s3.delete_object(Bucket=BUCKET_NAME, Key=filename)
