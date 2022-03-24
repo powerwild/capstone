@@ -42,10 +42,16 @@ def create_games():
 
     url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
     if type(form.data['image_url']) is not str:
-        image = form.data['image_url']
 
-        if not allowed_file(image.filename):
-          return {"errors": "file type not permitted"}, 400
+        image = form.data['image_url']
+        if not image:
+            return {'errors': ['No image given']}
+
+        if not image.filename:
+            return {"errors": "file type not permitted"}
+        if image.filename:
+            if not allowed_file(image.filename):
+                return {"errors": "file type not permitted"}
 
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
@@ -72,6 +78,8 @@ def create_games():
         user = User.query.get(current_user.id)
         return user.format_dict()
     if form.errors:
+        if not url == 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg':
+            delete_file_from_s3(url[37:].lower())
         return {'errors': format_form_errors(form.errors)}
 
 
