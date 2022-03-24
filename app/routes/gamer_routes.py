@@ -65,7 +65,7 @@ def update_games(game_id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     url = ''
-    if type(form.data['image_url']) is not str:
+    if form.data.get('image_url') and type(form.data['image_url']) is not str:
         image = form.data['image_url']
 
         if not allowed_file(image.filename):
@@ -83,7 +83,7 @@ def update_games(game_id):
     if form.validate_on_submit():
         game = Game.query.get(game_id)
         game.title = form.data['title']
-        game.image_url = url
+        game.image_url = url if url else game.image_url
         game.description = form.data['description']
         game.genre = form.data['genre']
         game.console = form.data['console']

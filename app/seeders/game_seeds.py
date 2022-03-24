@@ -1,11 +1,7 @@
 from app import db
 from app.models import Game
-# from PIL import Image
 from app.s3_help_funcs import get_unique_filename, upload_file_to_s3
-import requests
-# import json
-# from flask import send_from_directory
-import io
+
 
 
 game_names = [['Assasins Creed', 'http://game-traderz.s3.amazonaws.com/b0c46e6ae4d1409ea18e7483d3808480.jpg', 'Ancient Egypt, a land of majesty and intrigue, is disappearing in a ruthless fight for power. Unveil dark secrets and forgotten myths as you go back to the one founding moment: The Origins of the Assassins Brotherhood.', 'Adventure', 'Playstation 4'],
