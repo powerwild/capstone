@@ -4,7 +4,7 @@ from app import db
 from app.models import Trade
 from app.models import Game
 from app.forms import NewTradeForm, UpdateTradeForm
-from app.routes.user_routes import format_form_errors
+from app.routes.gamer_routes import format_form_errors
 
 trade_routes = Blueprint('trades', __name__)
 
@@ -44,6 +44,8 @@ def finish_trade_request(trade_id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         trade = Trade.query.get(trade_id)
+        if trade == None:
+            return {'errors': ['Trade has Expired']}
         trade.req_game_id = form.data['req_game_id']
         trade.status = 'Accepted'
         req_game = Game.query.get(form.data['req_game_id'])

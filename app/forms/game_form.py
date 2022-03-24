@@ -11,7 +11,7 @@ class NoValidateSelectField(SelectField):
 
 class GameForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    image_url = FileField('Image', validators=[DataRequired()])
+    image_url = FileField('Image')
     description = TextAreaField('Description', validators=[DataRequired()])
     genre = NoValidateSelectField('Genre', choices=['Strategy', 'Sandbox', 'First Person Shooter', 'Multiplayer Online', 'Role-Playing', 'Simulation', 'Sports', 'Puzzle', 'Adventure', 'Survival', 'Platformer'])
     console = NoValidateSelectField('Console', choices=['Playstation 4','Playstation 3', 'Xbox 1', 'Xbox 360', 'Switch', 'Wii U', 'PC'])

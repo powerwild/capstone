@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 from flask_login import current_user, login_required
 from app import db
-from app.routes.user_routes import format_form_errors
+from app.routes.gamer_routes import format_form_errors
 from app.models import Review
 from app.forms import ReviewForm
 

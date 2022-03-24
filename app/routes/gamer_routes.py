@@ -4,10 +4,28 @@ from app import db
 from app.models import User
 from app.models import Game
 from app.forms import GameForm
-from app.routes.user_routes import format_form_errors
 from app.s3_help_funcs import allowed_file, get_unique_filename, upload_file_to_s3, delete_file_from_s3
 gamer_routes = Blueprint('gamers', __name__)
 
+
+
+def format_form_errors(errors):
+    formatted_errors = []
+    for field in errors:
+        for error in errors[field]:
+            if field == 'confirm_password':
+                formatted_errors.append(f'Confirm Password {" ".join(str.split(error)[1:])}')
+            elif field == 'email':
+                formatted_errors.append(f'{field.title()} {error.lower()}')
+            elif field == 'gamer_id':
+                pass
+            elif error == 'Invalid URL.':
+                formatted_errors.append(error)
+            elif field == 'image_url':
+                formatted_errors.append(f'Image URL {" ".join(str.split(error)[1:])}')
+            else:
+                formatted_errors.append(f'{field.title()} {" ".join(str.split(error)[1:])}')
+    return formatted_errors
 
 @gamer_routes.route('/', methods=['GET'])
 @login_required
@@ -22,13 +40,12 @@ def create_games():
     form = GameForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    url = ''
+    url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
     if type(form.data['image_url']) is not str:
         image = form.data['image_url']
 
         if not allowed_file(image.filename):
-            url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
-        #   return {"errors": "file type not permitted"}, 400
+          return {"errors": "file type not permitted"}, 400
 
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
