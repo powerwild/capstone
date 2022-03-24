@@ -7,6 +7,8 @@ def add_trade_seeds():
     for x in gamer_ids:
         if not x == gamer_ids[-1]:
             y = x + 1
+            if x == 4:
+                y = 6
             t = Trade(
                 requester_id=x,
                 recipient_id=y,
