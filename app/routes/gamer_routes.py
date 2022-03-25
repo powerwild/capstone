@@ -48,10 +48,10 @@ def create_games():
             return {'errors': ['No image given']}
 
         if not image.filename:
-            return {"errors": "file type not permitted"}
+            return {"errors": ["File type not permitted"]}
         if image.filename:
             if not allowed_file(image.filename):
-                return {"errors": "file type not permitted"}
+                return {"errors": ["File type not permitted"]}
 
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
