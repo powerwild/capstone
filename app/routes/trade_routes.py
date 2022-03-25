@@ -49,8 +49,12 @@ def finish_trade_request(trade_id):
         trade.req_game_id = form.data['req_game_id']
         trade.status = 'Accepted'
         req_game = Game.query.get(form.data['req_game_id'])
+        if req_game.copies_avail < 1:
+            return {'errors': ['Game not available. Trade not completed.']}
         req_game.copies_avail -= 1
         rec_game = Game.query.get(trade.rec_game_id)
+        if rec_game.copies_avail < 1:
+            return {'errors': ['Game not available. Trade not completed.']}
         rec_game.copies_avail -= 1
         db.session.commit()
         return trade.format_dict()
