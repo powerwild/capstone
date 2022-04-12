@@ -18,6 +18,10 @@
 * If you get an 'econnrefused' when trying to launch the application, run the command 'sudo service postgresql start' to get psql up and running
 
 
+![Screenshot (11)](https://user-images.githubusercontent.com/92146309/163052925-1b0d736f-4b20-4775-8edf-61b34ffa1067.png)
+
+
+
 # Technologies
   * React/Redux
   * Python/Flask
