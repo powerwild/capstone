@@ -8,6 +8,14 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_cors import CORS
 import os
 
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get('SCHEMA')
+def add_prefix_for_prod(attr):
+    if environment == "production":
+        return f"{SCHEMA}.{attr}"
+    else:
+        return attr
+
 app = Flask(__name__)
 app.config.from_object(Configure)
 db = SQLAlchemy(app)

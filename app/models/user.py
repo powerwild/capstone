@@ -1,10 +1,12 @@
-from app import db
+from app import db, environment, SCHEMA, add_prefix_for_prod
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False, unique=True)
