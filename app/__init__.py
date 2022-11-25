@@ -16,7 +16,7 @@ def add_prefix_for_prod(attr):
     else:
         return attr
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../react-cap/build', static_url_path='/')
 app.config.from_object(Configure)
 db = SQLAlchemy(app)
 Migrate(app, db)
@@ -74,5 +74,5 @@ def inject_csrf_token(response):
 @app.route('/<path:path>')
 def react_root(path):
     if path == 'favicon.ico':
-        return app.send_static_file('favicon.ico')
+        return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
