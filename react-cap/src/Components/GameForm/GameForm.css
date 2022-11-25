@@ -1,0 +1,41 @@
+#game-modal {
+    height: 65vh;
+    width: 30vw;
+    background-color: lightgray;
+}
+
+.game-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.game-form > label {
+    width: 26vw;
+}
+
+.validate-errors {
+    color: red;
+}
+
+.new-game-btn {
+    height: 4vh;
+    width: 10vw;
+    color: white;
+    border-radius: 10px;
+    background-color: blue;
+}
+
+.game-form-btn {
+    height: 4vh;
+    width: 6vw;
+    background-color: lightgreen;
+    border-radius: 10px;
+}
+
+label > * {
+    margin-left: 1vw;
+}

@@ -1,0 +1,55 @@
+.signup-btn {
+    height: 10%;
+    width: 10%;
+    background-color: forestgreen;
+    color: white;
+    border-radius: 10px;
+    border: 8px solid black;
+    font-size: larger;
+}
+
+#signup-modal {
+    height: 60vh;
+    width: 30vw;
+    background-color: lightgray;
+}
+
+.signup-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.validation-errors {
+    color: red;
+}
+
+label > input {
+    margin-left: 1vw;
+}
+
+.signup-email {
+
+}
+
+.signup-username {
+
+}
+
+.signup-password {
+
+}
+
+.signup-confirm-password {
+
+}
+
+.signup-form-btn {
+    height: 4vh;
+    width: 6vw;
+    background-color: forestgreen;
+    color: white;
+}

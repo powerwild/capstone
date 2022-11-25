@@ -1,0 +1,40 @@
+#review-modal {
+    height: 40vh;
+    width: 30vw;
+    background-color: lightgray;
+}
+
+.review-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.validate-errors {
+    color: red;
+}
+
+.new-review-btn {
+    height: 4vh;
+    width: 10vw;
+    color: white;
+    border-radius: 10px;
+}
+
+.review-form-btn {
+    height: 4vh;
+    width: 6vw;
+    background-color: lightgreen;
+}
+
+label > input {
+    margin-left: 1vw;
+}
+
+.review-field {
+    height: 12vh;
+    width: 25vw;
+}

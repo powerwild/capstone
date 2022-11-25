@@ -1,0 +1,32 @@
+.splash-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-image: url(https://ih1.redbubble.net/image.214457477.5767/pp,840x830-pad,1000x1000,f8f8f8.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.splash-title {
+    background-color: white;
+    color: black;
+    font-size: xxx-large;
+    padding: 2vh;
+    font-family: cursive;
+    border-radius: 35px;
+}
+
+.splash-mission {
+    text-align: center;
+    width: 40%;
+    background-color: white;
+    color: black;
+    font-weight: 600;
+    font-size: x-large;
+    padding: 1vh;
+    font-family: cursive;
+    border-radius: 35px;
+}

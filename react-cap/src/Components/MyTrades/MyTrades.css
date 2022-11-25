@@ -1,0 +1,82 @@
+.trade-notif {
+    background-color: red;
+    border-radius: 20px;
+    height: 1vh;
+    width: 0.7vw;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.trades-modal-container {
+    position: relative;
+}
+
+#trades-modal {
+    background-color: #41E041;
+}
+
+.trade-container > div {
+    margin-bottom: 1vh;
+}
+
+.my-trades {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    overflow-y: scroll;
+    padding: 2vh;
+}
+
+.my-trades-modal-btn {
+    background-color: greenyellow;
+    padding: 5px;
+    border-radius: 10px;
+    width: 8vw;
+}
+
+.trade-container {
+    border: 2px solid black;
+    width: 70%;
+    background-color: lightgray;
+    margin-bottom: 2vh;
+    padding: 1vh;
+}
+
+.decline-trade {
+    background-color: firebrick;
+    color: white;
+    margin-left: 2vw;
+    padding: 5px;
+    border-radius: 10px;
+    width: 8vw;
+}
+
+.delete-trade-request {
+    background-color: firebrick;
+    color: white;
+    margin-left: 2vw;
+    padding: 5px;
+    border-radius: 10px;
+    width: 8vw;
+}
+
+.my-game-returned {
+    background-color: blue;
+    color: white;
+    margin-left: 2vw;
+    padding: 5px;
+    border-radius: 10px;
+    width: 8vw;
+}
+
+.close-trade-modal {
+    background-color: firebrick;
+    color: white;
+    margin-left: 2vw;
+    padding: 5px;
+    border-radius: 10px;
+    width: 8vw;
+}

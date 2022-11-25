@@ -1,0 +1,47 @@
+.login-btn {
+    height: 10%;
+    width: 10%;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    border: 8px solid black;
+    font-size: larger;
+}
+
+#login-modal {
+    height: 40vh;
+    width: 30vw;
+    background-color: lightgray;
+}
+
+.login-form {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.validation-errors {
+    color: red;
+}
+
+label > input {
+    margin-left: 1vw;
+}
+
+.credential {
+
+}
+
+.login-password {
+
+}
+
+.login-form-btn {
+    height: 4vh;
+    width: 6vw;
+    background-color: blue;
+    color: white;
+}

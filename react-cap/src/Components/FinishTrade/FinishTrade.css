@@ -1,0 +1,58 @@
+.finish-trade-direct {
+    font-size: xx-large;
+}
+
+.trade-options {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 2vh;
+    box-sizing: border-box;
+    background-color: #29B329;
+}
+
+.finish-trade-img {
+    height: 20%;
+    width: 20%;
+}
+
+.trade-option {
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
+    background-color: lightgray;
+    margin-bottom: 4vh;
+}
+
+.title-console {
+    display: flex;
+    flex-direction: column;
+}
+
+#finish-trade-modal {
+    width: 80vw;
+}
+
+.trade-option-descrip {
+    width: 80%;
+    overflow-y: scroll;
+    font-size: larger;
+}
+
+.accept-trade-btn {
+    background-color: blue;
+    color: white;
+    margin-left: 2vw;
+    padding: 5px;
+    border-radius: 10px;
+    width: 8vw;
+}
+
+.close-finish-trade-modal {
+    background-color: firebrick;
+    color: white;
+    margin-left: 2vw;
+    padding: 5px;
+    border-radius: 10px;
+    width: 8vw;
+}

@@ -1,0 +1,15 @@
+.about-me {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100vw;
+    align-items: center;
+    background-color: lightgray;
+    height: 7vh;
+    font-size: larger;
+}
+
+.about-me > a {
+    text-decoration: none;
+}

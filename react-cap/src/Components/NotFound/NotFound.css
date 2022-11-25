@@ -1,0 +1,16 @@
+.not-found {
+    background-image: url('https://images3.alphacoders.com/214/thumb-1920-214889.jpg');
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.not-found-message {
+    align-self: flex-start;
+    margin-top: 4vh;
+    color: whitesmoke;
+}

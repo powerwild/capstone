@@ -1,0 +1,116 @@
+.gamer-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #29B329;
+    overflow-y: scroll;
+    height: 100vh;
+    width: 100vw;
+}
+
+.gamer-name {
+    font-size: xxx-large;
+}
+
+.gamer-games {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.game-details {
+    width: 25%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2%;
+    background-color: lightgray;
+    margin-top: 10vh;
+}
+
+.game-image {
+    width: 50%;
+    height: 30vh;
+}
+
+.game-copies {
+
+}
+
+.game-title {
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.game-console-name {
+    color: blueviolet;
+    padding: 5px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.game-console-genre {
+    width: 20vw;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1vh;
+}
+
+.game-description {
+    border-top: 3px solid darkslategrey;
+    border-bottom: 3px solid darkslategrey;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.trade-message {
+    color: firebrick;
+    text-decoration: none;
+}
+
+.trade-message:hover {
+    text-decoration: underline;
+}
+
+.gamer-reviews {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 2%;
+}
+
+.review-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    padding: 2%;
+    width: 50vw;
+    height: 20vh;
+    margin-top: 2%;
+    background-color: lightgray;
+}
+
+.gamer-reviews-title {
+    font-size: xx-large;
+}
+
+.review-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviewer {
+    font-size: small;
+    text-align: end;
+}
+
+.review {
+    font-size: large;
+    height: 15vh;
+}
