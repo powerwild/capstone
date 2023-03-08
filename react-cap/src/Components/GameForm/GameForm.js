@@ -49,7 +49,7 @@ const GameForm = ({ onClose, game }) => {
                     {validationErrors?.map((err, i) => (
                         <li key={i}>{err}</li>
                     ))}
-                    {imageLoading ? <li>Image uploading to AWS.</li> : null}
+                    {imageLoading ? <li>AWS free has expired. Image will not upload.</li> : null}
                 </ul>
                 <label htmlFor='title'>
                     Title
