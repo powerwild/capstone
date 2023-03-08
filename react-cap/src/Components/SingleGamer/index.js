@@ -7,7 +7,7 @@ import DeleteGameModal from '../DeleteGame';
 import ReviewModal from '../ReviewForm';
 import DeleteReviewModal from '../DeleteReview';
 import './Gamer.css';
-import AWS_OUT from '../../../AWS_OUT.jpg';
+import AWS_OUT from '../../AWS_OUT.jpg';
 
 
 
