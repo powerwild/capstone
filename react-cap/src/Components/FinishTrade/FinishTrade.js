@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { acceptTradeThunk, rejectTrade } from "../../store/tradeStore";
-import AWS_OUT from '../../../AWS_OUT.jpg';
+import AWS_OUT from '../../AWS_OUT.jpg';
 
 
 
