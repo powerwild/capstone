@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { acceptTradeThunk, rejectTrade } from "../../store/tradeStore";
-
+import AWS_OUT from '../../../AWS_OUT.jpg';
 
 
 
@@ -37,7 +37,7 @@ const FinishTrade = ({ onClose, trade }) => {
                 if (game.copies_avail > 0) {
                     return (
                         <div className='trade-option' key={game.id} value={game.id} onClick={() => acceptRequest(game.id)}>
-                            <img className='finish-trade-img' src={game.image_url} />
+                            <img className='finish-trade-img' src={AWS_OUT} />
                             <div className='title-console'>
                                 <div>{game.title}</div>
                                 <div>{game.console}  {game.genre}</div>
