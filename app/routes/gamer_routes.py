@@ -4,7 +4,7 @@ from app import db
 from app.models import User
 from app.models import Game
 from app.forms import GameForm
-from app.s3_help_funcs import allowed_file, get_unique_filename, upload_file_to_s3, delete_file_from_s3
+# from app.s3_help_funcs import allowed_file, get_unique_filename, upload_file_to_s3, delete_file_from_s3
 gamer_routes = Blueprint('gamers', __name__)
 
 
@@ -19,10 +19,10 @@ def format_form_errors(errors):
                 formatted_errors.append(f'{field.title()} {error.lower()}')
             elif field == 'gamer_id':
                 pass
-            elif error == 'Invalid URL.':
-                formatted_errors.append(error)
-            elif field == 'image_url':
-                formatted_errors.append(f'Image URL {" ".join(str.split(error)[1:])}')
+#             elif error == 'Invalid URL.':
+#                 formatted_errors.append(error)
+#             elif field == 'image_url':
+#                 formatted_errors.append(f'Image URL {" ".join(str.split(error)[1:])}')
             else:
                 formatted_errors.append(f'{field.title()} {" ".join(str.split(error)[1:])}')
     return formatted_errors
@@ -40,26 +40,27 @@ def create_games():
     form = GameForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
-    if type(form.data['image_url']) is not str:
+    url = 'placeholder'
+#     url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
+#     if type(form.data['image_url']) is not str:
 
-        image = form.data['image_url']
-        if not image:
-            return {'errors': ['No image given']}
+#         image = form.data['image_url']
+#         if not image:
+#             return {'errors': ['No image given']}
 
-        if not image.filename:
-            return {"errors": ["File type not permitted"]}
-        if image.filename:
-            if not allowed_file(image.filename):
-                return {"errors": ["File type not permitted"]}
+#         if not image.filename:
+#             return {"errors": ["File type not permitted"]}
+#         if image.filename:
+#             if not allowed_file(image.filename):
+#                 return {"errors": ["File type not permitted"]}
 
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        if "url" not in upload:
-            url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
-        #   return upload, 400
-        else:
-            url = upload['url']
+#         image.filename = get_unique_filename(image.filename)
+#         upload = upload_file_to_s3(image)
+#         if "url" not in upload:
+#             url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
+#         #   return upload, 400
+#         else:
+#             url = upload['url']
 
 
     if form.validate_on_submit():
@@ -78,8 +79,8 @@ def create_games():
         user = User.query.get(current_user.id)
         return user.format_dict()
     if form.errors:
-        if not url == 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg':
-            delete_file_from_s3(url[37:].lower())
+#         if not url == 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg':
+#             delete_file_from_s3(url[37:].lower())
         return {'errors': format_form_errors(form.errors)}
 
 
@@ -88,22 +89,23 @@ def create_games():
 def update_games(game_id):
     form = GameForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    
+    url = 'placeholder'
+#     url = ''
+#     if form.data.get('image_url') and type(form.data['image_url']) is not str:
+#         image = form.data['image_url']
 
-    url = ''
-    if form.data.get('image_url') and type(form.data['image_url']) is not str:
-        image = form.data['image_url']
+#         if not allowed_file(image.filename):
+#             url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
+#         #   return {"errors": "file type not permitted"}, 400
 
-        if not allowed_file(image.filename):
-            url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
-        #   return {"errors": "file type not permitted"}, 400
-
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        if "url" not in upload:
-            url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
-        #   return upload, 400
-        else:
-            url = upload["url"]
+#         image.filename = get_unique_filename(image.filename)
+#         upload = upload_file_to_s3(image)
+#         if "url" not in upload:
+#             url = 'https://s3.console.aws.amazon.com/s3/object/game-traderz?region=us-east-2&prefix=video-game-control-line-and-fill-style-icon-free-vector.jpg'
+#         #   return upload, 400
+#         else:
+#             url = upload["url"]
 
     if form.validate_on_submit():
         game = Game.query.get(game_id)
@@ -128,7 +130,7 @@ def update_games(game_id):
 @login_required
 def delete_games(game_id):
     game = Game.query.get(game_id)
-    delete_file_from_s3(game.image_url[37:].lower())
+#     delete_file_from_s3(game.image_url[37:].lower())
     db.session.delete(game)
     db.session.commit()
     user = User.query.get(current_user.id)
