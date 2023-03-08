@@ -7,6 +7,7 @@ import DeleteGameModal from '../DeleteGame';
 import ReviewModal from '../ReviewForm';
 import DeleteReviewModal from '../DeleteReview';
 import './Gamer.css';
+import AWS_OUT from '../../../AWS_OUT.jpg';
 
 
 
@@ -37,7 +38,7 @@ const SingleGamer = () => {
             <div className='gamer-games'>
                 {gamer?.games.map(game => (
                     <div className='game-details' key={game.id}>
-                        <img className='game-image' src={game.image_url} />
+                        <img className='game-image' src={AWS_OUT} />
                         <div className='game-copies text'>{game.copies_avail} out of {game.copies} copies</div>
                         <div className='game-title text'>{game.title}</div>
                         <div className='game-console-genre'>
